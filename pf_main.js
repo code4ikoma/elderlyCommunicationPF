@@ -270,11 +270,20 @@ app.post("/api/command/:command", function(req, res, next){
     
     
   }
+  else if( req.params.command == "kintone2heroku"){
+    console.log("start kintone2heroku command");
+    
+    input_kintone_id = req.query.kintone_id;
+    console.log("input_kintone_id = " + input_kintone_id);
+
+    call_to_pickup_people( input_kintone_id );  //送迎対象者に送迎予定を電話で伝える
+  }
+  
   
   /* ===============以下、テスト1 (postmanから送信) ============== */
   else if( req.params.command == "1"){
     
-    input_pickup_people_callid = "0743787077";
+    input_pickup_people_callid = "09012345678";
     input_pickup_people = "野津";
     input_date = "2019-04-21";
     input_time = "0900";
@@ -364,12 +373,14 @@ app.post("/api/command/:command", function(req, res, next){
   
     
   }
-    else if( req.params.command == "5" ){
-    
-      sendgrid_command.send_email_broadcast_notify_register_schedule();
-  
-    
+  else if( req.params.command == "5" ){
+    sendgrid_command.send_email_broadcast_notify_register_schedule();
   }
+  else if( req.params.command == "9" ){
+    console.log("test=9");
+  }
+  
+  
   /* ===============以上、テスト ======================== */
   
   //update_database( req.params.command );
